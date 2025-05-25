@@ -85,7 +85,7 @@ VOICE_ID = "xTB8eataxCKE46gkjKkH"
 # ───── FOLDERS / FILES ──────────────────────────────────
 VIDEO_DIR = Path(__file__).parent / "lulu" / "videos"
 OUTPUT = "asmr_reel.mp4"
-FONT = r"NotoSansJP-Medium.ttf"
+FONT = Path(__file__).parent / "NotoSansJP-Medium.ttf"
 FONTSIZE, COLOR = 45, "white"
 RESO = (480, 854)
 
