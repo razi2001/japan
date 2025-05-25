@@ -83,7 +83,7 @@ ELEVEN_API_KEY = "sk_12dfc751c84275171a2c4369631843ef14d2711e07f3f472"
 VOICE_ID = "xTB8eataxCKE46gkjKkH"
 
 # ───── FOLDERS / FILES ──────────────────────────────────
-VIDEO_DIR = r"C:\Users\razif\Desktop\business tiktok\Japanese\lulu\videos"
+VIDEO_DIR = Path(__file__).parent / "lulu" / "videos"
 OUTPUT = "asmr_reel.mp4"
 FONT = r"NotoSansJP-Medium.ttf"
 FONTSIZE, COLOR = 45, "white"
