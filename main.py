@@ -3,6 +3,7 @@
 Create a 9:16 ASMR reel: random-loop video background + word-timed subtitles
 works with the minimal `moviepy` build (no .resize / .subclip on CompositeClip)
 """
+from datetime import datetime
 from pathlib import Path
 import re
 import asyncio, tempfile, textwrap, os, random
@@ -56,7 +57,7 @@ class UploadPostClient:
                     "title": title,
                     "user": user,
                     "platform[]": platforms,
-                    "is_aigc": True
+                    # "is_aigc": True
                 }
                 if description:
                     data["description"] = description
@@ -90,29 +91,53 @@ FONTSIZE, COLOR = 45, "white"
 RESO = (480, 854)
 
 # ───── SCRIPT TEXT ──────────────────────────────────────
-PROMPT = textwrap.dedent(
+DEFAULT_PROMPT = """
+You are Lulu, a fun and teasing Japanese teacher hosting a daily TikTok challenge called “Guess with Lulu 🎌✨”. The goal is to keep viewers engaged. Each video starts with an exciting hook like “Can YOU guess what this means?”, and promises the answer at the end with a countdown (5… 4… 3… 2… 1…). Choose a playful, kawaii, spicy, or funny Japanese phrase that’s easy to guess. Instead of syllables, give a short and playful **hint**. At the end, reveal the meaning and invite users to comment their guesses.
+
+Use this EXACT format PLEASE:
+
+Day {day} of Guess with Lulu!
+I’ll reveal the meaning at the end, so stay with me.
+
+Today’s phrase is:
+変な気持ちだね〜？
+
+Again, slowly:
+変な気持ちだね〜？
+
+Here is a hint: You say this sentencce when something feels a little off.
+
+Before giving the answer, follow and drop your guess in the comments.
+
+Answer in 3… 2… 1…
+
+It means: “This feels weird.”
+
+See you tomorrow honey.
+
+""".strip()
+
+DUOLINGO_PROMPT = textwrap.dedent(
     """
     I want you to generate me a lesson for japanese similar to this one:
-    Change the intro, super brief (Your name is Lulu).
+    Change the intro, super brief (Your name is Lulu). The game is always named "Duolingo with Lulu"
     Please be creative for the thing you teach (sometimes horny, sometimes bad words, sometimes good words, or kawaii, or sentences of everyday; really be random, but it should be an easy thing that people know in english), it should be random thing, that could attract the user in the first seconds.
     It should be a playfull lesson. For the syllable parts, maximum 4 groups of syllables to say together, don't overdo with every syllable, group them, so its not too long.
     The last part, should be different, and should allow the viewer to either interact in the comments, or follow, or like the video (choose one randomly), be creative, and kawaii, and sometimes related to the lesson, and keep the outro super brief please, because people will leave.
     Return it exactly in this format, with good punctuation. Please nothing more:
 
-Hey, it's Lulu!
-Today we'll see How to say: “You’re an asshole”… in Japanese!!
-嫌なやつだね〜？
+    Day {day} of Duolingo with Lulu until I hit 10K subs!!  
+    Today let’s learn: “Where’s my cat?”… in Japanese!  
+    猫どこ〜？
 
-Syllable by syllable:
-いや…
-なや…
-つだ…
-ねぇ♡
+    Syllable by syllable:  
+    ねこ…  
+    どこ〜？
 
-Say it fast:
-嫌なやつだね〜？
+    Say it fast:  
+    猫どこ〜？
 
-Drop your next phrase in the comments, I’ll pick one of my followers to feature in the next lesson.
+    Follow me for Day {next_day} if you love your cat too 🐾💕
 """
 ).strip()
 
@@ -208,9 +233,21 @@ async def main():
     eleven = ElevenLabs(api_key=ELEVEN_API_KEY)
     oai = openai.AsyncOpenAI()
 
+    start_date = datetime(2025, 5, 26)
+    today = datetime.now()
+    duolingo_day = (today - start_date).days + 1
+
+    print(duolingo_day)
+
+    # Pick prompt based on time
+    if 3 <= today.hour < 10:
+        prompt = DUOLINGO_PROMPT.format(day=duolingo_day, next_day=duolingo_day + 1)
+    else:
+        prompt = DEFAULT_PROMPT.format(day=duolingo_day)
+
     response = await oai.chat.completions.create(
         model="gpt-4",
-        messages=[{"role": "user", "content": PROMPT}],
+        messages=[{"role": "user", "content": prompt}],
         temperature=0.8,
     )
     script_text = response.choices[0].message.content.strip()
