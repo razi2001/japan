@@ -325,7 +325,8 @@ async def main():
     publish_client = UploadPostClient(api_key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlenphbmkucmF6aUBnbWFpbC5jb20iLCJleHAiOjQ5MDA2Nzk0MzEsImp0aSI6IjRjMzEzODc0LTMzOTktNGVhMi05NzMzLWViMDEwMzU1ODU4NCJ9.C6QIQdmSAs4iXAyGVb20eSXmUDCQh2J-AM1ZYoq35TE")
 
     title_match = re.search(r'[“"](.*?)[”"]', script_text)
-    title = "'" + title_match.group(1) + "'" + " in Japanese 💖" if title_match else "Japanese ASMR Lesson"
+    #title = "'" + title_match.group(1) + "'" + " in Japanese 💖" if title_match else "Japanese ASMR Lesson"
+    title = "Follow to unlock tomorrow's phrase 💖"
     hashtags_line = [
         "japanese","anime","asmr","kawaii","love","fyp","learnjapanese",
         "otaku","weeb","cute","asmrvideo","animegirl","bilingual",
