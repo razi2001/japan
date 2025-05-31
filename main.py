@@ -80,8 +80,8 @@ class UploadPostClient:
 os.environ["OPENAI_API_KEY"] = (
     "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"
 )
-ELEVEN_API_KEY = "sk_12dfc751c84275171a2c4369631843ef14d2711e07f3f472"
-VOICE_ID = "xTB8eataxCKE46gkjKkH"
+ELEVEN_API_KEY = "sk_1a13123b8ba72ad28794f1e14aeb2c6a7cec62713e367655"
+VOICE_ID = "k0yoxkl8kx5HBN4jXPPn"
 
 # ───── FOLDERS / FILES ──────────────────────────────────
 VIDEO_DIR = Path(__file__).parent / "lulu" / "videos"
@@ -144,26 +144,18 @@ DUOLINGO_PROMPT = textwrap.dedent(
 PROMPT = textwrap.dedent(
     """
     I want you to generate me a lesson for japanese similar to this one:
-    Change the intro, super brief (Your name is Lulu).
-    Please be creative for the thing you teach (sometimes horny, sometimes bad words: example 'Are you gay?' / 'You are a nigga' / 'You are my slave'), it should be random thing, that could attract the user in the first seconds.
-    It should be a playfull lesson. For the syllable parts, maximum 4 groups of syllables to say together, don't overdo with every syllable, group them, so its not too long.
-    The last part, should be different, and should allow the viewer to either interact in the comments, or follow, or like the video (choose one randomly), be creative, and kawaii, and sometimes related to the lesson, and keep the outro super brief please, because people will leave.
+    You should talk about funny bad words (either hot, either funny words: example 'Are you gay?' / 'You are a black guy' / 'You are my slave' / 'You are my baby girl' / 'You are my kawaii ass' / 'You are a bad lesbian'), it should be random thing, that could attract the user in the first seconds. Please a sentence completly random in that style.
+    You should change the ahh or the middle sentences (e.g: Say it fast) by other things similar.
     Return it exactly in this format, with good punctuation. Please nothing more:
 
-Hey, it's Lulu!
-Today we'll see How to say: “You’re an asshole”… in Japanese!!
-嫌なやつだね〜？
-
-Syllable by syllable:
-いや…
-なや…
-つだ…
-ねぇ♡
-
+“You’re an asshole”… in Japanese!!
+嫌なやつだね〜!!!
 Say it fast:
-嫌なやつだね〜？
-
-Drop your next phrase in the comments, I’ll pick one of my followers to feature in the next lesson.
+嫌なやつだね〜!!!
+faster for meee!!!!!
+You’re an asshole!!!
+嫌なやつだね〜!!
+嫌なやつだね〜!! AHHH!!
 """
 ).strip()
 
@@ -251,8 +243,6 @@ async def transcribe_words(wav: str, client) -> list:
 
     return grouped
 
-
-
 # ───── MAIN ─────────────────────────────────────────────
 async def main():
     # prepare clients
@@ -267,7 +257,7 @@ async def main():
 
     # Pick prompt based on time
     if 6 <= today.hour < 10:
-        prompt = DUOLINGO_PROMPT.format(day=duolingo_day, next_day=duolingo_day + 1)
+        prompt = PROMPT
     elif 14 <= today.hour < 18:
         prompt = DEFAULT_PROMPT.format(day=duolingo_day)
     else:
