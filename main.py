@@ -78,7 +78,7 @@ class UploadPostClient:
 
 # ───── API KEYS ──────────────────────────────────────────
 os.environ["OPENAI_API_KEY"] = (
-    "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"
+    "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"
 )
 ELEVEN_API_KEY = "sk_1a13123b8ba72ad28794f1e14aeb2c6a7cec62713e367655"
 VOICE_ID = "k0yoxkl8kx5HBN4jXPPn"
@@ -265,7 +265,7 @@ async def main():
 
 
     response = await oai.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.8,
     )
