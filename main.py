@@ -78,7 +78,7 @@ class UploadPostClient:
 
 # ───── API KEYS ──────────────────────────────────────────
 os.environ["OPENAI_API_KEY"] = (
-    "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"
+    "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"
 )
 ELEVEN_API_KEY = "sk_1a13123b8ba72ad28794f1e14aeb2c6a7cec62713e367655"
 VOICE_ID = "k0yoxkl8kx5HBN4jXPPn"
