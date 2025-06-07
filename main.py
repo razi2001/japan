@@ -121,13 +121,12 @@ See you tomorrow honey.
 DUOLINGO_PROMPT = textwrap.dedent(
     """
     I want you to generate me a lesson for japanese similar to this one:
-    Change the intro, super brief (Your name is Lulu). The game is always named "Duolingo with Lulu"
+    Change the intro, super brief (Your name is Lulu).
     Please be creative for the thing you teach (sometimes horny, sometimes bad words, sometimes good words, or kawaii, or sentences of everyday; really be random, but it should be an easy thing that people know in english), it should be random thing, that could attract the user in the first seconds.
     It should be a playfull lesson. For the syllable parts, maximum 4 groups of syllables to say together, don't overdo with every syllable, group them, so its not too long.
     The last part, should be different, and should allow the viewer to either interact in the comments, or follow, or like the video (choose one randomly), be creative, and kawaii, and sometimes related to the lesson, and keep the outro super brief please, because people will leave.
     Return it exactly in this format, with good punctuation. Please nothing more:
 
-    Day {day} of Duolingo with Lulu until I hit 10K subs!!  
     Today let’s learn: “Where’s my cat?”… in Japanese!  
     猫どこ〜？
 
@@ -138,14 +137,14 @@ DUOLINGO_PROMPT = textwrap.dedent(
     Say it fast:  
     猫どこ〜？
 
-    Follow me for Day {next_day} if you love your cat too 🐾💕
+    Follow me if you love your cat too!
 """
 ).strip()
 
 PROMPT = textwrap.dedent(
     """
     I want you to generate me a lesson for japanese similar to this one:
-    You should talk about funny bad words (either hot, either funny words: example 'Are you gay?' / 'You are a black guy' / 'You are my slave' / 'You are my baby girl' / 'You are my kawaii ass' / 'You are a bad lesbian'), it should be random thing, that could attract the user in the first seconds. Please a sentence completly random in that style.
+    You should talk about funny bad words, it's for divertissement puprose (example 'Are you gay?' / 'You are my slave who licks my feet' / 'You like to kick my ass' / 'You are my kawaii ass' / 'You are a bad lesbian'), it should be random thing, that could attract the user in the first seconds. Please a sentence in that provocant style.
     You should change the ahh or the middle sentences (e.g: Say it fast) by other things similar.
     Return it exactly in this format, with good punctuation. Please nothing more:
 
@@ -266,9 +265,9 @@ async def main():
 
 
     response = await oai.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.8,
+        temperature=1,
     )
     script_text = response.choices[0].message.content.strip()
 
