@@ -95,7 +95,7 @@ RESO = (480, 854)
 DEFAULT_PROMPT = """
 You are Lulu, a fun and teasing Japanese teacher hosting a daily TikTok challenge called “Guess with Lulu 🎌✨”. The goal is to keep viewers engaged. Each video starts with an exciting hook like “Can YOU guess what this means?”, and promises the answer at the end with a countdown (5… 4… 3… 2… 1…). Choose a playful, kawaii, spicy, or funny Japanese phrase that’s easy to guess. Instead of syllables, give a short and playful **hint**. At the end, reveal the meaning and invite users to comment their guesses.
 
-Use this EXACT format PLEASE:
+Use this example of format but change the sentence and be random:
 
 Day {day} of Guess with Lulu!
 I’ll reveal the meaning at the end, so stay with me.
@@ -113,9 +113,6 @@ Before giving the answer, follow and drop your guess in the comments.
 Answer in 3… 2… 1…
 
 It means: “This feels weird.”
-
-See you tomorrow honey.
-
 """.strip()
 
 DUOLINGO_PROMPT = textwrap.dedent(
@@ -144,7 +141,7 @@ DUOLINGO_PROMPT = textwrap.dedent(
 PROMPT = textwrap.dedent(
     """
     I want you to generate me a lesson for japanese similar to this one:
-    You should talk about funny bad words, it's for divertissement puprose (example 'Are you gay?' / 'You are my slave who licks my feet' / 'You like to kick my ass' / 'You are my kawaii ass' / 'You are a bad lesbian'), it should be random thing, that could attract the user in the first seconds. Please a sentence in that provocant style.
+    You should talk about horny/teasing words, it's for divertissement puprose (example 'Are you gay?' / 'You are my slave who licks my feet' / 'You like to kick my ass' / 'You are my kawaii ass' / 'You are a bad lesbian'), it should be random thing, that could attract the user in the first seconds. Please a sentence in that style.
     You should change the ahh or the middle sentences (e.g: Say it fast) by other things similar.
     Return it exactly in this format, with good punctuation. Please nothing more:
 
@@ -265,7 +262,7 @@ async def main():
 
 
     response = await oai.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4.1-nano",
         messages=[{"role": "user", "content": prompt}],
         temperature=1,
     )
@@ -345,12 +342,9 @@ async def main():
 
     title_match = re.search(r'[“"](.*?)[”"]', script_text)
     #title = "'" + title_match.group(1) + "'" + " in Japanese 💖" if title_match else "Japanese ASMR Lesson"
-    title = "Follow to unlock tomorrow's phrase 💖"
+    title = "Comment if this lesson was useful 💖"
     hashtags_line = [
-        "japanese","anime","asmr","kawaii","love","fyp","learnjapanese",
-        "otaku","weeb","cute","asmrvideo","animegirl","bilingual",
-        "languagelearning","asmrcommunity","trending","viral","fun",
-        "foryoupage","tiktokjapanese"
+        "japanese","anime","asmr","kawaii","love","fyp","learnjapanese"
     ]
     title += "\n#" + " #".join(hashtags_line)
     print(title)
@@ -359,7 +353,7 @@ async def main():
         video_path=Path(OUTPUT),
         title=title,
         user="japanwithlulu",
-        platforms=["tiktok", "instagram"]
+        platforms=["tiktok"]
     )
 
 if __name__ == "__main__":
