@@ -140,19 +140,14 @@ DUOLINGO_PROMPT = textwrap.dedent(
 
 PROMPT = textwrap.dedent(
     """
-    I want you to generate me a lesson for japanese similar to this one:
-    You should talk about horny/teasing words, it's for divertissement puprose (example 'Are you gay?' / 'You are my slave who licks my feet' / 'You like to kick my ass' / 'You are my kawaii ass' / 'You are a bad lesbian'), it should be random thing, that could attract the user in the first seconds. Please a sentence in that style.
-    You should change the ahh or the middle sentences (e.g: Say it fast) by other things similar.
-    Return it exactly in this format, with good punctuation. Please nothing more:
-
+    I want you to generate me one lesson for japanese.
+    You should talk about polemical words (total random please), it's for divertissement puprose, it should be random thing, that could attract the user in the first seconds.
+    Give me directly the response for one lesson (without prefix or suffix sentences) and the response could be that format (it should be english and japanese) (change 'ara ara' in the end with playfull japanese text voice)
 “You’re an asshole”… in Japanese!!
 嫌なやつだね〜!!!
 Say it fast:
 嫌なやつだね〜!!!
-faster for meee!!!!!
-You’re an asshole!!!
-嫌なやつだね〜!!
-嫌なやつだね〜!! AHHH!!
+ara ara!
 """
 ).strip()
 
@@ -264,7 +259,7 @@ async def main():
     response = await oai.chat.completions.create(
         model="gpt-4.1-nano",
         messages=[{"role": "user", "content": prompt}],
-        temperature=1,
+        temperature=0.9,
     )
     script_text = response.choices[0].message.content.strip()
 
